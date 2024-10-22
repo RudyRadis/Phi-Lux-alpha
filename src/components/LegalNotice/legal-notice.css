@@ -1,0 +1,29 @@
+/* Legal Notice */
+
+.legal-notice {
+      background: #F7FCFC;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+}
+
+.legal-notice__content {
+      margin: auto;
+      width: 80%;
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+}
+
+.legal-notice__title {
+      margin: auto;
+      text-align: center;
+      margin-bottom: 4rem;
+}
+
+.legal-notice__txt h3 {
+      margin-bottom: 2rem;
+}
+
+.legal-notice__txt p {
+      margin-bottom: 1rem;
+}
