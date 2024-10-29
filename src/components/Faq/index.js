@@ -119,6 +119,10 @@ const faqItems = [
         answer: "Pour les téléphones Android, vous pouvez télécharger l'application sur le Playstore. Pour les téléphones iOS (iPhone), l'application est disponible sur l'App Store. Une fois téléchargée, créez votre compte et celui de votre enfant. Vous disposez de 14 jours d'essai gratuit. Profitez-en !",
     },
     {
+        question: "Comment annuler le renouvellement de l'abonnement ?",
+        answer: "Rien de plus simple. Dans la section 'Compte' de l'application, cliquez sur 'Abonnement' et décochez la case 'Renouvellement automatique'.",
+    },
+    {
         question: "Mon enfant doit-il être encadré pour travailler sur Phi-Lux ?",
         answer: "Il est recommandé de faire le point régulièrement avec votre enfant. Prenez 20 minutes par semaine pour consulter sa progression via son tableau de bord. Discutez-en avec lui. ",
     },
