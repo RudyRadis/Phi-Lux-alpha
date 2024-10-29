@@ -116,7 +116,7 @@ const faqItems = [
     },
     {
         question: "Comment accéder à l’application ?",
-        answer: "Pour les téléphones android, vous pouvez télécharger l'application sur le Playstore. Pour les téléphones ios (iphone), l'application est disponible sur l'app store. Une fois téléchargée, créé votre compte et celui de votre enfant. Vous disposez de 10 jours d'essai gratuit. Profitez-en !",
+        answer: "Pour les téléphones Android, vous pouvez télécharger l'application sur le Playstore. Pour les téléphones iOS (iPhone), l'application est disponible sur l'App Store. Une fois téléchargée, créez votre compte et celui de votre enfant. Vous disposez de 10 jours d'essai gratuit. Profitez-en !",
     },
     {
         question: "Mon enfant doit-il être encadré pour travailler sur Phi-Lux ?",
