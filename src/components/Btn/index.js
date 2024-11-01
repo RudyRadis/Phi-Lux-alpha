@@ -8,110 +8,115 @@ import './btn.css';
 import { useEffect, useState } from 'react';
 
 const Btn = ({
-  link,
-  label,
-  iconPosition = 'left',
-  iconClass,
-  buttonClass,
-  isSubmitButton = false
+      link,
+      label,
+      iconPosition = 'left',
+      iconClass,
+      buttonClass,
+      isSubmitButton = false
 }) => {
-  const [dynamicLink, setDynamicLink] = useState(link);
-  const [isWebView, setIsWebView] = useState(false);
-  let icon = null;
+      const [dynamicLink, setDynamicLink] = useState(link);
+      const [isWebView, setIsWebView] = useState(false);
+      let icon = null;
 
-  if (iconClass) {
-    switch (iconClass) {
-      case 'download':
-        icon = faDownload;
-        break;
-      case 'arrow-right':
-        icon = faArrowRight;
-        break;
-      case 'arrow-left':
-        icon = faArrowLeft;
-        break;
-      case 'thumb':
-        icon = faThumbsUp;
-        break;
-      case 'send':
-        icon = faPaperPlane;
-        break;
-      default:
-        icon = null;
-        break;
-    }
-  }
-
-  useEffect(() => {
-    // Détection du type d'appareil et du webview
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isWebViewAgent = /instagram|fbav|facebook|line|micromessenger|twitter|whatsapp|snapchat|tiktok|pinterest|threads/.test(userAgent);
-    setIsWebView(isWebViewAgent);
-
-    if (iconClass === 'download') {
-      if (/iphone|ipad|ipod/.test(userAgent)) {
-        // Appareil iOS (iPhone, iPad, iPod)
-        setDynamicLink('https://apps.apple.com/us/app');
-      } else if (/macintosh/.test(userAgent)) {
-        // MacOS
-        setDynamicLink('https://www.apple.com/app-store/');
-      } else if (/android/.test(userAgent)) {
-        // Appareil Android - Gestion des deux scénarios
-        if (isWebViewAgent) {
-          // Scenario 1: isWebViewAgent = true
-          setDynamicLink('https://play.google.com/store');
-        } else {
-          // Scenario 2: Navigateur classique Android
-          setDynamicLink('market://details?id=com.android.vending');
-        }
-      } else {
-        // Autres systèmes d'exploitation (Windows, Linux, etc.)
-        setDynamicLink('https://play.google.com/store');
+      if (iconClass) {
+            switch (iconClass) {
+                  case 'download':
+                        icon = faDownload;
+                        break;
+                  case 'arrow-right':
+                        icon = faArrowRight;
+                        break;
+                  case 'arrow-left':
+                        icon = faArrowLeft;
+                        break;
+                  case 'thumb':
+                        icon = faThumbsUp;
+                        break;
+                  case 'send':
+                        icon = faPaperPlane;
+                        break;
+                  default:
+                        icon = null;
+                        break;
+            }
       }
-    }
-  }, [iconClass]);
 
-  const handleClick = () => {
-    if (dynamicLink.startsWith('market://')) {
-      // Utiliser le lien market:// sur Android
-      window.location.href = dynamicLink;
-    }
-  };
+      useEffect(() => {
+            // Détection du type d'appareil et du webview
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isWebViewAgent = /instagram|fbav|facebook|line|micromessenger|twitter|whatsapp|snapchat|tiktok|pinterest|threads/.test(userAgent);
+            setIsWebView(isWebViewAgent);
 
-  return isSubmitButton ? (
-    <button type="submit" className={`btn ${buttonClass}`}>
-      {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
-      {label}
-      {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
-    </button>
-  ) : (
-    dynamicLink.startsWith('market://') ? (
-      // Utilisation d'un bouton pour les intents Android
-      <button onClick={handleClick} className={`btn ${buttonClass}`}>
-        {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
-        {label}
-        {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
-      </button>
-    ) : (
-      // Utilisation d'un lien <a> pour les URLs classiques
-      <a href={dynamicLink} target="_blank" rel="noopener noreferrer">
-        <button className={`btn ${buttonClass}`}>
-          {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
-          {label}
-          {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
-        </button>
-      </a>
-    )
-  );
+            if (iconClass === 'download') {
+                  if (/iphone|ipad|ipod/.test(userAgent)) {
+                        // Appareil iOS (iPhone, iPad, iPod)
+                        setDynamicLink('https://apps.apple.com/us/app');
+                  } else if (/macintosh/.test(userAgent)) {
+                        // MacOS
+                        setDynamicLink('https://www.apple.com/app-store/');
+                  } else if (/android/.test(userAgent)) {
+                        // Appareil Android - Gestion des deux scénarios
+                        if (isWebViewAgent) {
+                              // Scenario 1: isWebViewAgent = true
+                              setDynamicLink('https://play.google.com/store');
+                        } else {
+                              // Scenario 2: Navigateur classique Android
+                              setDynamicLink('intent://details?id=com.android.vending#Intent;scheme=market;package=com.android.vending;end');
+                        }
+                  } else {
+                        // Autres systèmes d'exploitation (Windows, Linux, etc.)
+                        setDynamicLink('https://play.google.com/store');
+                  }
+            }
+      }, [iconClass]);
+
+      const handleClick = () => {
+            try {
+                  // Tenter d'ouvrir l'application via un intent
+                  window.location.href = dynamicLink;
+            } catch (error) {
+                  alert(error)
+                  // Si l'ouverture de l'application échoue, rediriger vers l'URL de fallback
+                  setDynamicLink('https://play.google.com/store/apps/details?id=com.android.vending');
+                  window.location.href = dynamicLink;
+            }
+      };
+
+      return isSubmitButton ? (
+            <button type="submit" className={`btn ${buttonClass}`}>
+                  {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+                  {label}
+                  {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+            </button>
+      ) : (
+            dynamicLink.startsWith('market://') ? (
+                  // Utilisation d'un bouton pour les intents Android
+                  <button onClick={handleClick} className={`btn ${buttonClass}`}>
+                        {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+                        {label}
+                        {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+                  </button>
+            ) : (
+                  // Utilisation d'un lien <a> pour les URLs classiques
+                  <a href={dynamicLink} target="_blank" rel="noopener noreferrer">
+                        <button className={`btn ${buttonClass}`}>
+                              {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+                              {label}
+                              {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+                        </button>
+                  </a>
+            )
+      );
 };
 
 Btn.propTypes = {
-  link: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  iconPosition: PropTypes.oneOf(['left', 'right']),
-  iconClass: PropTypes.string,
-  buttonClass: PropTypes.string,
-  isSubmitButton: PropTypes.bool,
+      link: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      iconPosition: PropTypes.oneOf(['left', 'right']),
+      iconClass: PropTypes.string,
+      buttonClass: PropTypes.string,
+      isSubmitButton: PropTypes.bool,
 };
 
 export default Btn;
