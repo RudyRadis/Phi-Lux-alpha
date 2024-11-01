@@ -45,7 +45,7 @@ const Btn = ({
   useEffect(() => {
     // Détection du type d'appareil et du webview
     const userAgent = navigator.userAgent.toLowerCase();
-    const isWebViewAgent = /instagram|fbav|facebook|line|micromessenger|twitter|whatsapp|snapchat|tiktok|pinterest|threads/.test(userAgent);
+    const isWebViewAgent = /fbav|facebook|line|micromessenger|twitter|whatsapp|snapchat|tiktok|pinterest|threads/.test(userAgent);
     setIsWebView(isWebViewAgent);
 
     if (iconClass === 'download') {
