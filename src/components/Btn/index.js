@@ -60,9 +60,12 @@ const Btn = ({
                         if (isWebViewAgent) {
                               // Scenario 1: isWebViewAgent = true
                               setDynamicLink('https://play.google.com/store');
+                              setTimeout(() => {
+                                    setDynamicLink('https://play.google.com/store');
+                              }, 500);
                         } else {
                               // Scenario 2: Navigateur classique Android
-                              setDynamicLink('market://search?q=applications');
+                              setDynamicLink('market://search?q=');
                               setTimeout(() => {
                                     setDynamicLink('https://play.google.com/store');
                               }, 500);
