@@ -54,7 +54,7 @@ const Btn = ({
         setDynamicLink('https://www.apple.com/app-store/');
       } else if (/android/.test(userAgent)) {
         // Appareil Android
-        setDynamicLink('https://play.google.com/store/apps');
+        setDynamicLink('intent://play.google.com/store/apps#Intent;scheme=https;package=com.android.vending;end');
       } else {
         // Autres systèmes d'exploitation (Windows, Linux, etc.)
         setDynamicLink('https://play.google.com/store');
