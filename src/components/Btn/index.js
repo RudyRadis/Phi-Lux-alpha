@@ -56,26 +56,13 @@ const Btn = ({
         // MacOS
         setDynamicLink('https://www.apple.com/app-store/');
       } else if (/android/.test(userAgent)) {
-        // Appareil Android - Gestion des différents scénarios
+        // Appareil Android - Gestion des deux scénarios
         if (isWebViewAgent) {
           // Scenario 1: isWebViewAgent = true
-          setDynamicLink('https://play.google.com/store/apps/details?id=com.android.vending');
+          setDynamicLink('https://play.google.com/store');
         } else {
-          // Scenario 2: Vérifier si on est quand même dans un webview sans être dans isWebViewAgent
-          try {
-            const standalone = window.navigator.standalone;
-            const isStandalone = typeof standalone !== 'undefined' && standalone;
-            if (!isStandalone && (window.matchMedia('(display-mode: standalone)').matches === false)) {
-              // Scenario 2: Webview détecté sans correspondre à isWebViewAgent
-              setDynamicLink('https://play.google.com/store');
-            } else {
-              // Scenario 3: Navigateur classique Android
-              setDynamicLink('market://details?id=com.android.vending');
-            }
-          } catch (e) {
-            // Par défaut, rediriger vers Play Store
-            setDynamicLink('https://play.google.com/store');
-          }
+          // Scenario 2: Navigateur classique Android
+          setDynamicLink('market://details?id=com.android.vending');
         }
       } else {
         // Autres systèmes d'exploitation (Windows, Linux, etc.)
@@ -85,18 +72,9 @@ const Btn = ({
   }, [iconClass]);
 
   const handleClick = () => {
-    if (isWebView) {
-      // Si on est dans un webview, demander à l'utilisateur d'ouvrir dans un navigateur
-      alert('Pour une meilleure expérience, veuillez ouvrir ce lien dans votre navigateur.');
+    if (dynamicLink.startsWith('market://')) {
+      // Utiliser le lien market:// sur Android
       window.location.href = dynamicLink;
-    } else if (dynamicLink.startsWith('market://')) {
-      // Utiliser le lien market:// sur Android avec un fallback
-      try {
-        window.location.href = dynamicLink;
-      } catch (e) {
-        // Fallback si market:// échoue
-        window.location.href = 'https://play.google.com/store';
-      }
     }
   };
 
@@ -107,8 +85,8 @@ const Btn = ({
       {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
     </button>
   ) : (
-    dynamicLink.startsWith('market://') || isWebView ? (
-      // Utilisation d'un bouton pour les intents Android ou si on est dans un webview
+    dynamicLink.startsWith('market://') ? (
+      // Utilisation d'un bouton pour les intents Android
       <button onClick={handleClick} className={`btn ${buttonClass}`}>
         {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
         {label}
