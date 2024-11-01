@@ -16,6 +16,7 @@ const Btn = ({
   isSubmitButton = false
 }) => {
   const [dynamicLink, setDynamicLink] = useState(link);
+  const [isWebView, setIsWebView] = useState(false);
   let icon = null;
 
   if (iconClass) {
@@ -42,8 +43,11 @@ const Btn = ({
   }
 
   useEffect(() => {
-    // Détection du type d'appareil
+    // Détection du type d'appareil et du webview
     const userAgent = navigator.userAgent.toLowerCase();
+    const isWebViewAgent = /instagram|fbav|facebook|line|micromessenger/.test(userAgent);
+    setIsWebView(isWebViewAgent);
+
     if (iconClass === 'download') {
       if (/iphone|ipad|ipod/.test(userAgent)) {
         // Appareil iOS (iPhone, iPad, iPod)
@@ -63,8 +67,12 @@ const Btn = ({
 
   const handleClick = () => {
     if (dynamicLink.startsWith('market://')) {
-      // Utiliser le lien market:// sur Android
-      window.location.href = dynamicLink;
+      if (isWebView) {
+        alert('Pour télécharger l\'application, ouvrez ce lien dans votre navigateur.');
+      } else {
+        // Utiliser le lien market:// sur Android
+        window.location.href = dynamicLink;
+      }
     }
   };
 
