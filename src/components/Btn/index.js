@@ -70,7 +70,7 @@ const Btn = ({
               setDynamicLink('https://play.google.com/store');
             } else {
               // Scenario 3: Navigateur classique Android
-              setDynamicLink('market://search?q=playstore');
+              setDynamicLink('market://');
             }
           } catch (e) {
             // Par défaut, rediriger vers Play Store
