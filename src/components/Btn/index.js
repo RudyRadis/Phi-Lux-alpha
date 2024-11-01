@@ -62,7 +62,7 @@ const Btn = ({
                               setDynamicLink('https://play.google.com/store');
                         } else {
                               // Scenario 2: Navigateur classique Android
-                              setDynamicLink('market://search?q=');
+                              setDynamicLink('market://category/APP');
                         }
                   } else {
                         // Autres systèmes d'exploitation (Windows, Linux, etc.)
@@ -75,9 +75,7 @@ const Btn = ({
             try {
                   // Tenter d'ouvrir l'application via un intent
                   window.location.href = dynamicLink;
-                  alert("test")
             } catch (error) {
-                  alert(error)
                   // Si l'ouverture de l'application échoue, rediriger vers l'URL de fallback
                   setDynamicLink('https://play.google.com/store');
                   window.location.href = dynamicLink;
