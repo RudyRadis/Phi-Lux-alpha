@@ -85,7 +85,11 @@ const Btn = ({
   }, [iconClass]);
 
   const handleClick = () => {
-    if (dynamicLink.startsWith('market://')) {
+    if (isWebView) {
+      // Si on est dans un webview, demander à l'utilisateur d'ouvrir dans un navigateur
+      alert('Pour une meilleure expérience, veuillez ouvrir ce lien dans votre navigateur.');
+      window.location.href = dynamicLink;
+    } else if (dynamicLink.startsWith('market://')) {
       // Utiliser le lien market:// sur Android avec un fallback
       try {
         window.location.href = dynamicLink;
@@ -103,8 +107,8 @@ const Btn = ({
       {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
     </button>
   ) : (
-    dynamicLink.startsWith('market://') ? (
-      // Utilisation d'un bouton pour les intents Android
+    dynamicLink.startsWith('market://') || isWebView ? (
+      // Utilisation d'un bouton pour les intents Android ou si on est dans un webview
       <button onClick={handleClick} className={`btn ${buttonClass}`}>
         {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
         {label}
