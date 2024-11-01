@@ -9,84 +9,111 @@ import './btn.css';
 import { useEffect, useState } from 'react';
 
 const Btn = ({
-  link,
-  label,
-  iconPosition = 'left',
-  iconClass,
-  buttonClass,
-  isSubmitButton = false
+      link,
+      label,
+      iconPosition = 'left',
+      iconClass,
+      buttonClass,
+      isSubmitButton = false
 }) => {
-  const [dynamicLink, setDynamicLink] = useState(link);
-  let icon = null;
+      const [dynamicLink, setDynamicLink] = useState(link);
+      let icon = null;
 
-  if (iconClass) {
-    switch (iconClass) {
-      case 'download':
-        icon = faDownload;
-        break;
-      case 'arrow-right':
-        icon = faArrowRight;
-        break;
-      case 'arrow-left':
-        icon = faArrowLeft;
-        break;
-      case 'thumb':
-        icon = faThumbsUp;
-        break;
-      case 'send':
-        icon = faPaperPlane;
-        break;
-      default:
-        icon = null;
-        break;
-    }
-  }
-
-  useEffect(() => {
-    // Détection du type d'appareil
-    const userAgent = navigator.userAgent.toLowerCase();
-    if (iconClass === 'download') {
-      if (/iphone|ipad|ipod/.test(userAgent)) {
-        // Appareil iOS (iPhone, iPad, iPod)
-        setDynamicLink('https://apps.apple.com/us/app');
-      } else if (/macintosh/.test(userAgent)) {
-        // MacOS
-        setDynamicLink('https://www.apple.com/app-store/');
-      } else if (/android/.test(userAgent)) {
-        // Appareil Android
-        // setDynamicLink('https://play.google.com/store/apps');
-        setDynamicLink('intent://store#Intent;scheme=market;package=com.android.vending;end');
-      } else {
-        // Autres systèmes d'exploitation (Windows, Linux, etc.)
-        setDynamicLink('https://play.google.com/store');
+      if (iconClass) {
+            switch (iconClass) {
+                  case 'download':
+                        icon = faDownload;
+                        break;
+                  case 'arrow-right':
+                        icon = faArrowRight;
+                        break;
+                  case 'arrow-left':
+                        icon = faArrowLeft;
+                        break;
+                  case 'thumb':
+                        icon = faThumbsUp;
+                        break;
+                  case 'send':
+                        icon = faPaperPlane;
+                        break;
+                  default:
+                        icon = null;
+                        break;
+            }
       }
-    }
-  }, [iconClass]);
 
-  return isSubmitButton ? (
-    <button type="submit" className={`btn ${buttonClass}`}>
-      {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
-      {label}
-      {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
-    </button>
-  ) : (
-    <Link href={dynamicLink} {...(iconClass === 'download' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-      <button className={`btn ${buttonClass}`}>
-        {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
-        {label}
-        {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
-      </button>
-    </Link>
-  );
+      useEffect(() => {
+            // Détection du type d'appareil
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (iconClass === 'download') {
+                  if (/iphone|ipad|ipod/.test(userAgent)) {
+                        // Appareil iOS (iPhone, iPad, iPod)
+                        setDynamicLink('https://apps.apple.com/us/app');
+                  } else if (/macintosh/.test(userAgent)) {
+                        // MacOS
+                        setDynamicLink('https://www.apple.com/app-store/');
+                  } else if (/android/.test(userAgent)) {
+                        // Appareil Android
+                        // setDynamicLink('https://play.google.com/store/apps');
+                        setDynamicLink('intent://store#Intent;scheme=market;package=com.android.vending;end');
+                  } else {
+                        // Autres systèmes d'exploitation (Windows, Linux, etc.)
+                        setDynamicLink('https://play.google.com/store');
+                  }
+            }
+      }, [iconClass]);
+
+      // Fonction qui gère le clic pour les liens intent:// sur Android
+      const handleClick = () => {
+            if (iconClass === 'download' && dynamicLink.startsWith('intent://')) {
+                  window.location.href = dynamicLink; // Ouvre le lien intent
+            }
+      };
+
+      return isSubmitButton ? (
+            <button type="submit" className={`btn ${buttonClass}`}>
+                  {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+                  {label}
+                  {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+            </button>
+      ) : (
+            dynamicLink.startsWith('intent://') ? (
+                  // Utilisation d'un bouton pour les intents Android
+                  <button onClick={handleClick} className={`btn ${buttonClass}`}>
+                        {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+                        {label}
+                        {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+                  </button>
+            ) : (
+                  // Utilisation d'un lien <a> pour les URLs classiques
+                  <Link href={dynamicLink} {...(iconClass === 'download' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                        <button className={`btn ${buttonClass}`}>
+                              {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+                              {label}
+                              {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+                        </button>
+                  </Link>
+            )
+      );
+
+      // (
+      //   <Link href={dynamicLink} {...(iconClass === 'download' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+      //     <button className={`btn ${buttonClass}`}>
+      //       {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+      //       {label}
+      //       {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+      //     </button>
+      //   </Link>
+      // );
 };
 
 Btn.propTypes = {
-  link: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  iconPosition: PropTypes.oneOf(['left', 'right']),
-  iconClass: PropTypes.string,
-  buttonClass: PropTypes.string,
-  isSubmitButton: PropTypes.bool,
+      link: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      iconPosition: PropTypes.oneOf(['left', 'right']),
+      iconClass: PropTypes.string,
+      buttonClass: PropTypes.string,
+      isSubmitButton: PropTypes.bool,
 };
 
 export default Btn;
