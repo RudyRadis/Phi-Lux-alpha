@@ -59,17 +59,13 @@ const Btn = ({
                         // Appareil Android - Gestion des deux scénarios
                         if (isWebViewAgent) {
                               // Scenario 1: isWebViewAgent = true
-                              alert("rrr")
-                              // setDynamicLink('https://play.google.com/store');
-                              setTimeout(() => {
-                                    setDynamicLink('https://play.google.com/store');
-                              }, 500);
+                              setDynamicLink('https://play.google.com/store');
                         } else {
                               // Scenario 2: Navigateur classique Android
                               setDynamicLink('market://search?q=');
-                              setTimeout(() => {
-                                    setDynamicLink('https://play.google.com/store');
-                              }, 500);
+                              // setTimeout(() => {
+                              //       setDynamicLink('https://play.google.com/store');
+                              // }, 500);
                         }
                   } else {
                         // Autres systèmes d'exploitation (Windows, Linux, etc.)
