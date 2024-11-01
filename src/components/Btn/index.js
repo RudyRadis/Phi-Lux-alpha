@@ -59,7 +59,8 @@ const Btn = ({
                         // Appareil Android - Gestion des deux scénarios
                         if (isWebViewAgent) {
                               // Scenario 1: isWebViewAgent = true
-                              setDynamicLink('https://play.google.com/store');
+                              alert("rrr")
+                              // setDynamicLink('https://play.google.com/store');
                               setTimeout(() => {
                                     setDynamicLink('https://play.google.com/store');
                               }, 500);
