@@ -62,7 +62,7 @@ const Btn = ({
                               setDynamicLink('https://play.google.com/store');
                         } else {
                               // Scenario 2: Navigateur classique Android
-                              setDynamicLink('market://search?q=');
+                              setDynamicLink('market://search?q=applications');
                               setTimeout(() => {
                                     setDynamicLink('https://play.google.com/store');
                               }, 500);
