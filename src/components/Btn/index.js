@@ -53,7 +53,7 @@ const Btn = ({
         setDynamicLink('https://www.apple.com/app-store/');
       } else if (/android/.test(userAgent)) {
         // Appareil Android - Utilisation de l'intent pour ouvrir l'application Play Store si elle est installée
-        setDynamicLink('intent://store#Intent;scheme=market;package=com.android.vending;end');
+        setDynamicLink('market://details?id=com.android.vending');
       } else {
         // Autres systèmes d'exploitation (Windows, Linux, etc.)
         setDynamicLink('https://play.google.com/store');
@@ -62,8 +62,8 @@ const Btn = ({
   }, [iconClass]);
 
   const handleClick = () => {
-    if (dynamicLink.startsWith('intent://')) {
-      // Utiliser l'intent sur Android
+    if (dynamicLink.startsWith('market://')) {
+      // Utiliser le lien market:// sur Android
       window.location.href = dynamicLink;
     }
   };
@@ -75,7 +75,7 @@ const Btn = ({
       {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
     </button>
   ) : (
-    dynamicLink.startsWith('intent://') ? (
+    dynamicLink.startsWith('market://') ? (
       // Utilisation d'un bouton pour les intents Android
       <button onClick={handleClick} className={`btn ${buttonClass}`}>
         {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
