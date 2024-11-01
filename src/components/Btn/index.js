@@ -70,7 +70,7 @@ const Btn = ({
               setDynamicLink('https://play.google.com/store');
             } else {
               // Scenario 3: Navigateur classique Android
-              setDynamicLink('market://');
+              setDynamicLink('market://details?id=com.android.vending');
             }
           } catch (e) {
             // Par défaut, rediriger vers Play Store
@@ -86,8 +86,13 @@ const Btn = ({
 
   const handleClick = () => {
     if (dynamicLink.startsWith('market://')) {
-      // Utiliser le lien market:// sur Android
-      window.location.href = dynamicLink;
+      // Utiliser le lien market:// sur Android avec un fallback
+      try {
+        window.location.href = dynamicLink;
+      } catch (e) {
+        // Fallback si market:// échoue
+        window.location.href = 'https://play.google.com/store';
+      }
     }
   };
 
