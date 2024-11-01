@@ -54,7 +54,18 @@ const Btn = ({
         setDynamicLink('https://www.apple.com/app-store/');
       } else if (/android/.test(userAgent)) {
         // Appareil Android
-        setDynamicLink('intent://play.google.com/store/apps#Intent;scheme=https;package=com.android.vending;end');
+        // Appareil Android
+      setDynamicLink('https://play.google.com/store/apps'); // Lien de secours vers Play Store
+
+      // Forcer la redirection vers l'application Play Store avec un lien market://
+      setTimeout(() => {
+        try {
+          window.location.href = 'market://details?id=com.android.vending';
+        } catch (e) {
+          // Si market:// échoue, le lien web sera utilisé
+          window.location.href = 'https://play.google.com/store/apps';
+        }
+      }, 500); // Ajouter un léger délai pour laisser la page charger
       } else {
         // Autres systèmes d'exploitation (Windows, Linux, etc.)
         setDynamicLink('https://play.google.com/store');
