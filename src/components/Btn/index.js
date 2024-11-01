@@ -62,7 +62,7 @@ const Btn = ({
                               setDynamicLink('https://play.google.com/store');
                         } else {
                               // Scenario 2: Navigateur classique Android
-                              setDynamicLink('intent://store#Intent;scheme=market;package=com.android.vending;action=android.intent.action.VIEW;end');
+                              setDynamicLink('market://search?q=playstore');
                         }
                   } else {
                         // Autres systèmes d'exploitation (Windows, Linux, etc.)
@@ -75,15 +75,17 @@ const Btn = ({
             try {
                   // Tenter d'ouvrir l'application via un intent
                   window.location.href = dynamicLink;
+                  alert("test")
             } catch (error) {
                   alert(error)
                   // Si l'ouverture de l'application échoue, rediriger vers l'URL de fallback
-                  setDynamicLink('https://play.google.com/store/apps/details?id=com.android.vending');
+                  setDynamicLink('https://play.google.com/store');
                   window.location.href = dynamicLink;
             }
       };
 
       return isSubmitButton ? (
+            
             <button type="submit" className={`btn ${buttonClass}`}>
                   {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
                   {label}
