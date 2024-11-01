@@ -45,7 +45,7 @@ const Btn = ({
   useEffect(() => {
     // Détection du type d'appareil et du webview
     const userAgent = navigator.userAgent.toLowerCase();
-    const isWebViewAgent = /fbav|facebook|line|micromessenger|twitter|whatsapp|snapchat|tiktok|pinterest|threads/.test(userAgent);
+    const isWebViewAgent = /instagram|fbav|facebook|line|micromessenger|twitter|whatsapp|snapchat|tiktok|pinterest|threads/.test(userAgent);
     setIsWebView(isWebViewAgent);
 
     if (iconClass === 'download') {
@@ -56,11 +56,26 @@ const Btn = ({
         // MacOS
         setDynamicLink('https://www.apple.com/app-store/');
       } else if (/android/.test(userAgent)) {
-        // Appareil Android - Utilisation du lien HTTPS si en webview, sinon intent
+        // Appareil Android - Gestion des différents scénarios
         if (isWebViewAgent) {
-            setDynamicLink('https://play.google.com/store/apps/details?id=com.android.vending');
+          // Scenario 1: isWebViewAgent = true
+          setDynamicLink('https://play.google.com/store/apps/details?id=com.android.vending');
         } else {
-            setDynamicLink('market://details?id=com.android.vending');
+          // Scenario 2: Vérifier si on est quand même dans un webview sans être dans isWebViewAgent
+          try {
+            const standalone = window.navigator.standalone;
+            const isStandalone = typeof standalone !== 'undefined' && standalone;
+            if (!isStandalone && (window.matchMedia('(display-mode: standalone)').matches === false)) {
+              // Scenario 2: Webview détecté sans correspondre à isWebViewAgent
+              setDynamicLink('https://play.google.com/store');
+            } else {
+              // Scenario 3: Navigateur classique Android
+              setDynamicLink('market://details?id=com.android.vending');
+            }
+          } catch (e) {
+            // Par défaut, rediriger vers Play Store
+            setDynamicLink('https://play.google.com/store');
+          }
         }
       } else {
         // Autres systèmes d'exploitation (Windows, Linux, etc.)
