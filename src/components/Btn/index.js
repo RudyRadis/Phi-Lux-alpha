@@ -62,7 +62,7 @@ const Btn = ({
                               setDynamicLink('https://play.google.com/store');
                         } else {
                               // Scenario 2: Navigateur classique Android
-                              setDynamicLink('intent://details?id=com.android.vending#Intent;scheme=market;package=com.android.vending;end');
+                              setDynamicLink('intent://#Intent;scheme=market;package=com.android.vending;end');
                         }
                   } else {
                         // Autres systèmes d'exploitation (Windows, Linux, etc.)
