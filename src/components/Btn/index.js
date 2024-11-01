@@ -58,7 +58,7 @@ const Btn = ({
       } else if (/android/.test(userAgent)) {
         // Appareil Android - Utilisation du lien HTTPS si en webview, sinon intent
         if (isWebViewAgent) {
-          setDynamicLink('https://play.google.com/store/apps/details?id=com.android.vending');
+          setDynamicLink('https://play.google.com/store');
         } else {
           setDynamicLink('market://details?id=com.android.vending');
         }
