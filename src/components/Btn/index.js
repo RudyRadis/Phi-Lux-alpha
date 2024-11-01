@@ -92,7 +92,7 @@ const Btn = ({
                   {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
             </button>
       ) : (
-            dynamicLink.startsWith('intent://') ? (
+            dynamicLink.startsWith('market://') ? (
                   // Utilisation d'un bouton pour les intents Android
                   <button onClick={handleClick} className={`btn ${buttonClass}`}>
                         {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
