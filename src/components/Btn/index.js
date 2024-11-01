@@ -62,7 +62,7 @@ const Btn = ({
           setDynamicLink('https://play.google.com/store');
         } else {
           // Scenario 2: Navigateur classique Android
-          setDynamicLink('market://search?q=playstore');
+          setDynamicLink('market://');
         }
       } else {
         // Autres systèmes d'exploitation (Windows, Linux, etc.)
