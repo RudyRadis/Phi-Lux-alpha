@@ -56,8 +56,12 @@ const Btn = ({
         // MacOS
         setDynamicLink('https://www.apple.com/app-store/');
       } else if (/android/.test(userAgent)) {
-        // Appareil Android - Utilisation de l'intent pour ouvrir l'application Play Store si elle est installée
-        setDynamicLink('market://details?id=com.android.vending');
+        // Appareil Android - Utilisation du lien HTTPS si en webview, sinon intent
+        if (isWebViewAgent) {
+          setDynamicLink('https://play.google.com/store/apps/details?id=com.android.vending');
+        } else {
+          setDynamicLink('market://details?id=com.android.vending');
+        }
       } else {
         // Autres systèmes d'exploitation (Windows, Linux, etc.)
         setDynamicLink('https://play.google.com/store');
@@ -67,12 +71,8 @@ const Btn = ({
 
   const handleClick = () => {
     if (dynamicLink.startsWith('market://')) {
-      if (isWebView) {
-        alert('Pour télécharger l\'application, ouvrez ce lien dans votre navigateur.');
-      } else {
-        // Utiliser le lien market:// sur Android
-        window.location.href = dynamicLink;
-      }
+      // Utiliser le lien market:// sur Android
+      window.location.href = dynamicLink;
     }
   };
 
