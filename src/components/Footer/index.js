@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 const Footer = () => {
     const [isAndroid, setIsAndroid] = useState(false);
     const [isIOS, setIsIOS] = useState(false);
-    const [googlePlayLink, setGooglePlayLink] = useState('https://play.google.com/store'); // Valeur par défaut
 
     useEffect(() => {
         // Détection du type d'appareil
@@ -14,7 +13,6 @@ const Footer = () => {
 
         if (/android/i.test(userAgent)) {
             setIsAndroid(true);
-            setGooglePlayLink('market://details?id=com.example.your.package')
         } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             setIsIOS(true);
         }
@@ -66,7 +64,7 @@ const Footer = () => {
                     <div className="footer__doawload-app">
                         <h3>Télécharger l'application</h3>
                         <div className="list-store">
-                            <a href={googlePlayLink} target="_blank" rel="noopener noreferrer">
+                            <a href={googlePlayUrl} target="_blank" rel="noopener noreferrer">
                                 <Image src="/ressources/store/google-playstore-icon.svg" alt="Google Play Store" width={64} height={64} />
                             </a>
                             <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
