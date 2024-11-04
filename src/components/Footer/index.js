@@ -65,10 +65,10 @@ const Footer = () => {
                         <h3>Télécharger l'application</h3>
                         <div className="list-store">
                             <a href={googlePlayUrl} target="_blank" rel="noopener noreferrer">
-                                <Image src="/ressources/store/google-playstore-icon.svg" alt="Google Play Store" width={64} height={64} />
+                                <Image src="/ressources/store/google-playstore-icon.svg" alt="Google Play Store" width={64} height={64} className="google-play-store" />
                             </a>
                             <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
-                                <Image src="/ressources/store/app-store-icon.svg" alt="App Store" width={64} height={64} />
+                                <Image src="/ressources/store/app-store-icon.svg" alt="App Store" width={64} height={64} className="app-store" />
                             </a>
                         </div>
                     </div>
