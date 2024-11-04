@@ -51,7 +51,14 @@ const Btn = ({
             if (iconClass === 'download') {
                   if (/iphone|ipad|ipod/.test(userAgent)) {
                         // Appareil iOS (iPhone, iPad, iPod)
-                        setDynamicLink('https://apps.apple.com/us/app');
+                        // setDynamicLink('https://apps.apple.com/us/app');
+                        // Appareil iOS (iPhone, iPad, iPod)
+                        setDynamicLink('itms-apps://apps.apple.com/us/app');
+
+                        // Fallback si l'App Store ne s'ouvre pas (utilisation du lien web)
+                        setTimeout(() => {
+                              setDynamicLink('https://apps.apple.com/us/app');
+                        }, 500);
                   } else if (/macintosh/.test(userAgent)) {
                         // MacOS
                         setDynamicLink('https://www.apple.com/app-store/');
@@ -74,19 +81,30 @@ const Btn = ({
             }
       }, [iconClass]);
 
-      const handleClick = () => {
+      const handleClickAndroid = () => {
             try {
-                  // Tenter d'ouvrir l'application via un intent
+                  // Tenter d'ouvrir l'application via un intent (Android)
                   window.location.href = dynamicLink;
             } catch (error) {
                   // Si l'ouverture de l'application échoue, rediriger vers l'URL de fallback
                   setDynamicLink('https://play.google.com/store');
+                  window.location.href = 'https://play.google.com/store';
+            }
+      };
+
+      const handleClickIOS = () => {
+            try {
+                  // Tenter d'ouvrir l'application via un intent (iOS)
                   window.location.href = dynamicLink;
+            } catch (error) {
+                  // Si l'ouverture de l'application échoue, rediriger vers l'URL de fallback
+                  setDynamicLink('https://apps.apple.com/us/app');
+                  window.location.href = 'https://apps.apple.com/us/app';
             }
       };
 
       return isSubmitButton ? (
-            
+
             <button type="submit" className={`btn ${buttonClass}`}>
                   {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
                   {label}
@@ -94,8 +112,15 @@ const Btn = ({
             </button>
       ) : (
             dynamicLink.startsWith('market://') ? (
-                  // Utilisation d'un bouton pour les intents Android
-                  <button onClick={handleClick} className={`btn ${buttonClass}`}>
+                  // Utilisation d'un bouton pour les markets Android
+                  <button onClick={handleClickAndroid} className={`btn ${buttonClass}`}>
+                        {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
+                        {label}
+                        {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
+                  </button>
+            ) : dynamicLink.startsWith('itms-apps://') ? (
+                  // Utilisation d'un bouton pour les itms IOS
+                  <button onClick={handleClickIOS} className={`btn ${buttonClass}`}>
                         {iconPosition === 'left' && icon && <FontAwesomeIcon icon={icon} className='svg--left' />}
                         {label}
                         {iconPosition === 'right' && icon && <FontAwesomeIcon icon={icon} className='svg--right' />}
