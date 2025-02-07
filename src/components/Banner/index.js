@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Card from '@/components/Card';
 import PropTypes from 'prop-types';
 import './banner.css';
-
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLayoutEffect } from 'react';

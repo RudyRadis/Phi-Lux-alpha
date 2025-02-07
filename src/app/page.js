@@ -9,33 +9,63 @@ import Pricing from '@/components/Pricing';
 import Footer from '@/components/Footer';
 
 export default function Home() {
+	// useEffect(() => {
+	// 	const handleLoad = () => {
+	// 		// Récupère la position de scroll sauvegardée
+	// 		const savedPosition = localStorage.getItem('scrollPosition');
+	// 		if (savedPosition) {
+	// 			window.scrollTo(0, parseInt(savedPosition, 10));
+	// 		}
+	// 	};
+
+	// 	// Sauvegarde la position actuelle avant de quitter la page
+	// 	const handleScroll = () => {
+	// 		localStorage.setItem('scrollPosition', window.scrollY);
+	// 	};
+
+	// 	window.addEventListener('load', handleLoad);
+	// 	window.addEventListener('scroll', handleScroll);
+
+	// 	return () => {
+	// 		window.removeEventListener('load', handleLoad);
+	// 		window.removeEventListener('scroll', handleScroll);
+	// 	};
+	// }, []);
+
 	useEffect(() => {
 		const handleLoad = () => {
-			// Récupère la position de scroll sauvegardée
-			const savedPosition = localStorage.getItem('scrollPosition');
-			if (savedPosition) {
+		    // Vérifie si la page vient d'être ouverte (nouvelle session)
+		    const isNewSession = sessionStorage.getItem('newSession') === null;
+	  
+		    if (isNewSession) {
+			  // Réinitialise la position de scroll
+			  window.scrollTo(0, 0);
+			  sessionStorage.setItem('newSession', 'false');
+		    } else {
+			  // Récupère la position sauvegardée si ce n'est pas une nouvelle session
+			  const savedPosition = localStorage.getItem('scrollPosition');
+			  if (savedPosition) {
 				window.scrollTo(0, parseInt(savedPosition, 10));
-			}
+			  }
+		    }
 		};
-
-		// Sauvegarde la position actuelle avant de quitter la page
+	  
 		const handleScroll = () => {
-			localStorage.setItem('scrollPosition', window.scrollY);
+		    localStorage.setItem('scrollPosition', window.scrollY);
 		};
-
+	  
 		window.addEventListener('load', handleLoad);
 		window.addEventListener('scroll', handleScroll);
-
+	  
 		return () => {
-			window.removeEventListener('load', handleLoad);
-			window.removeEventListener('scroll', handleScroll);
+		    window.removeEventListener('load', handleLoad);
+		    window.removeEventListener('scroll', handleScroll);
 		};
-	}, []);
-
+	  }, []);
+	  
 
 	return (
 		<div>
-
 			<Banner
 				isHome={true}
 				title='La meilleure application pour apprendre les maths'
