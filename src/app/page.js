@@ -9,28 +9,28 @@ import Pricing from '@/components/Pricing';
 import Footer from '@/components/Footer';
 
 export default function Home() {
-	useEffect(() => {
-		const handleLoad = () => {
-			// Récupère la position de scroll sauvegardée
-			const savedPosition = localStorage.getItem('scrollPosition');
-			if (savedPosition) {
-				window.scrollTo(0, parseInt(savedPosition, 10));
-			}
-		};
+	// useEffect(() => {
+	// 	const handleLoad = () => {
+	// 		// Récupère la position de scroll sauvegardée
+	// 		const savedPosition = localStorage.getItem('scrollPosition');
+	// 		if (savedPosition) {
+	// 			window.scrollTo(0, parseInt(savedPosition, 10));
+	// 		}
+	// 	};
 
-		// Sauvegarde la position actuelle avant de quitter la page
-		// const handleScroll = () => {
-		// 	localStorage.setItem('scrollPosition', window.scrollY);
-		// };
+	// 	// Sauvegarde la position actuelle avant de quitter la page
+	// 	// const handleScroll = () => {
+	// 	// 	localStorage.setItem('scrollPosition', window.scrollY);
+	// 	// };
 
-		window.addEventListener('load', handleLoad);
-		// window.addEventListener('scroll', handleScroll);
+	// 	window.addEventListener('load', handleLoad);
+	// 	// window.addEventListener('scroll', handleScroll);
 
-		return () => {
-			window.removeEventListener('load', handleLoad);
-			// window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
+	// 	return () => {
+	// 		window.removeEventListener('load', handleLoad);
+	// 		// window.removeEventListener('scroll', handleScroll);
+	// 	};
+	// }, []);
 
 	// useEffect(() => {
 	// 	const handleLoad = () => {
@@ -62,6 +62,8 @@ export default function Home() {
 	// 	    window.removeEventListener('scroll', handleScroll);
 	// 	};
 	//   }, []);
+
+	console.log("coucou")
 
 	return (
 		<div>
