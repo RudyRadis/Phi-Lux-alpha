@@ -26,7 +26,6 @@ const Banner = ({
 					x: -500,
 					opacity: 0,
 					delay: 0,
-					immediateRender: false
 				}
 			);
 			gsap.from(".home-banner__card .card-long .card__descrip",
@@ -35,7 +34,6 @@ const Banner = ({
 					x: -500,
 					opacity: 0,
 					delay: 0.15,
-					immediateRender: false
 				}
 			);
 			gsap.from(".home-banner__card .card-long .card__btn",
@@ -44,7 +42,6 @@ const Banner = ({
 					x: -500,
 					opacity: 0,
 					delay: 0.30,
-					immediateRender: false
 				}
 			);
 		} else {
@@ -55,7 +52,6 @@ const Banner = ({
 						x: -500,
 						opacity: 0,
 						delay: 0,
-						immediateRender: false
 					}
 				);
 			}
@@ -65,7 +61,6 @@ const Banner = ({
 					x: -500,
 					opacity: 0,
 					delay: 0.15,
-					immediateRender: false
 				}
 			);
 		}
@@ -82,7 +77,6 @@ const Banner = ({
 			left: '+=500',
 			ease: "power1.out",
 			delay: 0,
-			immediateRender: false,
 		});
 
 		gsap.from(".home-banner__picture-main", {
@@ -96,7 +90,6 @@ const Banner = ({
 			x: 500,
 			opacity: 0,
 			ease: "power1.out",
-			immediateRender: false,
 		});
 	}, []);
 
