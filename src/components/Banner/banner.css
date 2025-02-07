@@ -93,6 +93,13 @@
       color: #F5FFFD;
 }
 
+.home-banner__card .card-long .card__title,
+.home-banner__card .card-long .card__descrip,
+.home-banner__card .card-long .card__btn {
+    opacity: 0;
+    transform: translateX(-500px);
+}
+
 /* ------------------------------- */
 
 .home-banner__picture {
@@ -122,6 +129,12 @@
       width: auto;
       height: 137%;
       z-index: 1;
+}
+
+.home-banner__picture-main,
+.home-banner__picture-svg {
+    opacity: 0;
+    transform: translateX(500px);
 }
 
 @keyframes rotate {
