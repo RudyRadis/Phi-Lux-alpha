@@ -93,11 +93,11 @@
       color: #F5FFFD;
 }
 
-.home-banner__card .card-long .card__title,
+/* .home-banner__card .card-long .card__title,
 .home-banner__card .card-long .card__descrip,
 .home-banner__card .card-long .card__btn {
     transform: translateX(-500px);
-}
+} */
 
 /* ------------------------------- */
 
@@ -130,10 +130,10 @@
       z-index: 1;
 }
 
-.home-banner__picture-main,
+/* .home-banner__picture-main,
 .home-banner__picture-svg {
     transform: translateX(500px);
-}
+} */
 
 @keyframes rotate {
       from {
