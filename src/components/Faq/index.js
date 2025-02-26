@@ -4,10 +4,10 @@ import { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import './faq.css';
-
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLayoutEffect } from 'react';
+import globalData from '@/app/globalData';
 
 const Faq = () => {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -110,9 +110,9 @@ const Faq = () => {
 
 const faqItems = [
     {
-        question: "Quelles classes couvre Phi-Lux ?",
+        question: `Quelles classes couvre ${globalData.appTitle} ?`,
         answer:
-            "L'application Phi-Lux couvre actuellement les classes du collège. Donc, de la 6e à la 3e. Le contenu est régulièrement mis à jour et les classes du lycée seront bientôt disponibles.",
+            `L'application ${globalData.appTitle} couvre actuellement les classes du collège. Donc, de la 6e à la 3e. Le contenu est régulièrement mis à jour et les classes du lycée seront bientôt disponibles.`,
     },
     {
         question: "Comment accéder à l’application ?",
@@ -123,16 +123,16 @@ const faqItems = [
         answer: "Rien de plus simple. Dans la section 'Compte' de l'application, cliquez sur 'Abonnement' et décochez la case 'Renouvellement automatique'.",
     },
     {
-        question: "Mon enfant doit-il être encadré pour travailler sur Phi-Lux ?",
+        question: `Mon enfant doit-il être encadré pour travailler sur ${globalData.appTitle} ?`,
         answer: "Il est recommandé de faire le point régulièrement avec votre enfant. Prenez 20 minutes par semaine pour consulter sa progression via son tableau de bord. Discutez-en avec lui. ",
     },
     {
-        question: "Mon enfant a-t-il besoin de Phi-Lux en plus de ses cours particuliers ?",
-        answer: "Oui ! Phi-Lux est une application pédagogique qui permettra à votre enfant de progresser de manière autonome et ludique. C'est un outil complémentaire avec les cours particuliers.",
+        question: `Mon enfant a-t-il besoin de ${globalData.appTitle} en plus de ses cours particuliers ?`,
+        answer: `Oui ! ${globalData.appTitle} est une application pédagogique qui permettra à votre enfant de progresser de manière autonome et ludique. C'est un outil complémentaire avec les cours particuliers.`,
     },
     {
-        question: "Mon enfant n’a pas de problème à l’école, a-t-il besoin de Phi-Lux ?",
-        answer: "Oui aussi ! Car même si votre enfant n'a pas de problème pour progresser à l'école, il aura accès à tout le contenu disponible en mathématiques pour progresser. Grâce à Phi-Lux, il pourra conserver son niveau.",
+        question: `Mon enfant n’a pas de problème à l’école, a-t-il besoin de ${globalData.appTitle} ?`,
+        answer: `Oui aussi ! Car même si votre enfant n'a pas de problème pour progresser à l'école, il aura accès à tout le contenu disponible en mathématiques pour progresser. Grâce à ${globalData.appTitle}, il pourra conserver son niveau.`,
     },
 ];
 

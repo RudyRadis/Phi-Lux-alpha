@@ -7,6 +7,7 @@ import './banner.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLayoutEffect } from 'react';
+import globalData from '@/app/globalData';
 
 const Banner = ({
 	isHome,
@@ -100,7 +101,7 @@ const Banner = ({
 			<div className="home-banner__circle--three"></div>
 
 			<div className={`home-banner__logo ${!isHome ? 'home-banner__logo--short' : ''}`}>
-				<img src="/ressources/logo/logo-philux-green.svg" alt="Logo Phi-Lux" />
+				<img src="/ressources/logo/logo-philux-green.svg" alt={`Logo ${globalData.appTitle}`} />
 			</div>
 
 			<div className="home-banner__vrtcl-lns">

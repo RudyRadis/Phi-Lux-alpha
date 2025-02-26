@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import './navbar.css';
+import globalData from '@/app/globalData';
 
 const Navbar = () => {
       const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,10 +40,10 @@ const Navbar = () => {
             <nav className={`navbar ${isFixed ? 'navbar__fixed' : ''} ${isMenuOpen ? 'open' : ''}`}>
                   <div className="navbar__logo">
                         <Link href="/">
-                              <img src="/ressources/logo/logo-philux-yellow.svg" alt="Logo Phi-Lux" />
+                              <img src="/ressources/logo/logo-philux-yellow.svg" alt={`Logo ${globalData.appTitle}`} />
                         </Link>
                         <Link href="/">
-                              PHI-LUX
+                              {globalData.appTitle}
                         </Link>
                   </div>
 

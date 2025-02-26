@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLayoutEffect } from 'react';
+import globalData from '@/app/globalData';
 
 const Pricing = () => {
 
@@ -99,7 +100,7 @@ const Pricing = () => {
                               <Card
                                     typeOf="long"
                                     titleTag="h2"
-                                    title="Offre PHI-LUX"
+                                    title={`Offres ${globalData.appTitle}`}
                                     descrip="Choisi l'abonnement qui te convient."
                                     colorDescrip="green"
                               />

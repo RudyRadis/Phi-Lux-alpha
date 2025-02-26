@@ -11,6 +11,7 @@ import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLayoutEffect } from 'react';
+import globalData from '@/app/globalData';
 
 const Review = () => {
       useEffect(() => {
@@ -126,10 +127,10 @@ const Review = () => {
                                                 <div className="slide__separator"></div>
                                                 <div className="slide__desc">
                                                       {[
-                                                            "Phi-Lux est un super outil qui a permis à ma fille de surmonter ses difficultés en maths. Les cours sont complets et les exercices interactifs permettent une meilleure compréhension. Je recommande à 100% !",
-                                                            "Application complète et ludique, facile d'utilisation. Nous avons maintenant le recul pour constater les progrès réalisés. Un très bon complément pour les révisions en mathématiques. Je recommande vivement Phi-Lux !",
-                                                            "J'ai conseillé Phi-Lux à des amis et je le referai sans hésiter. C'est un excellent outils pour réviser ou approfondir le travail de son enfant. Faites votre propre expérience, cela en vaut la peine.",
-                                                            "Excellente application pour accompagner notre fils dans son envie d'apprendre et de développer ses connaissances en mathématiques ! L'interface est agréable et facile à utiliser, et les exercices corrigés lui ont permis d'obtenir de meilleures notes aux évaluations. Merci, Phi-Lux !",
+                                                            `${globalData.appTitle} est un super outil qui a permis à ma fille de surmonter ses difficultés en maths. Les cours sont complets et les exercices interactifs permettent une meilleure compréhension. Je recommande à 100% !",
+                                                            "Application complète et ludique, facile d'utilisation. Nous avons maintenant le recul pour constater les progrès réalisés. Un très bon complément pour les révisions en mathématiques. Je recommande vivement ${globalData.appTitle} !",
+                                                            "J'ai conseillé ${globalData.appTitle} à des amis et je le referai sans hésiter. C'est un excellent outils pour réviser ou approfondir le travail de son enfant. Faites votre propre expérience, cela en vaut la peine.",
+                                                            "Excellente application pour accompagner notre fils dans son envie d'apprendre et de développer ses connaissances en mathématiques ! L'interface est agréable et facile à utiliser, et les exercices corrigés lui ont permis d'obtenir de meilleures notes aux évaluations. Merci, ${globalData.appTitle} !`,
                                                       ][index]}
                                                 </div>
                                           </div>

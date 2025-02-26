@@ -5,6 +5,7 @@ import './functionalities.css';
 import Card from '../Card';
 import AsyncGrid from '../AsyncGrid';
 import Image from 'next/image';
+import globalData from '@/app/globalData';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -225,7 +226,7 @@ const Functionalities = ({ typeOf }) => {
                   return (
                         <section className="child-functionalities">
                               <div className="child-functionalities__bg--one">
-                                    <Image src="ressources/home/logo-icon.svg" alt="Logo Phi-Lux" width={100} height={100} priority />
+                                    <Image src="ressources/home/logo-icon.svg" alt={`Logo ${globalData.appTitle}`} width={100} height={100} priority />
                               </div>
 
 
