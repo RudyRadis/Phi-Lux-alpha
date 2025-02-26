@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import './footer.css';
 import { useEffect, useState } from 'react';
+import globalData from '@/app/globalData';
 
 const Footer = () => {
     const [isAndroid, setIsAndroid] = useState(false);
@@ -40,7 +41,7 @@ const Footer = () => {
                 <div className="footer__top">
                     <div className="footer__contact-mail">
                         <h3>Contact par mail</h3>
-                        <div className="footer__mail-adress">philux@gmail.com</div>
+                        <div className="footer__mail-adress">{globalData.mailSupport}</div>
                     </div>
 
                     <div className="footer__social-networks">
